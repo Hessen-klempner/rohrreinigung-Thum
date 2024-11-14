@@ -1,0 +1,87 @@
+// header fix
+$(window).on("load scroll", function() {
+    if ($(this).scrollTop() > 0) {
+        $("header").addClass('smaller');
+        $("#logo").attr('src', logo2);
+    } else {
+        $("header").removeClass('smaller');
+        $("#logo").attr('src', logo1);
+    }
+});
+/* MAIN SLIDER */
+if ($('.slider').length) {
+    $('.slider').slick({
+        speed: 300,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        cssEase: 'linear',
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 7000,
+        dots: false
+    });
+}
+if ($('.review-slider').length) {
+    $('.review-slider').slick({
+        speed: 300,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        cssEase: 'linear',
+        arrows: true,
+        autoplay: true,
+        autoplaySpeed: 7000,
+        dots: false
+    });
+}
+AOS.init({
+    disable: 'tablet',
+    disable: 'mobile'
+
+});
+/* SCROLL TO TOP */
+$('#toTop').click(function(e) {
+    $('body,html').animate({
+        scrollTop: 0
+    }, 600);
+    e.preventDefault();
+});
+// $(document).ready(function(){
+//   var linkScroll = $('.nav-link');
+
+//   linkScroll.click(function(e){
+
+//       e.preventDefault();
+
+//       $('body, html').animate({
+//          scrollTop: $(this.hash).offset().top - 87
+//       }, 800);
+//    });
+// });
+$(document).ready(function() {
+    $(".nav-link").on('click', function(event) {
+        if (this.hash !== "") {
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function() {
+                window.location.hash = hash;
+            });
+
+            return false;
+        }
+
+
+    });
+});
+// video
+var videoMain = $('#video-main video')[0];
+$(document).ready(function() {
+    $('[data-src="#video-main"]').fancybox({
+        afterShow: function() {
+            $(videoMain).trigger('play');
+        },
+        afterClose: function() {
+            $(videoMain).trigger('pause');
+        }
+    });
+});
